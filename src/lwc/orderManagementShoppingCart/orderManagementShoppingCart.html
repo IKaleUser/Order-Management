@@ -114,7 +114,12 @@
 
         <div slot="footer">
             <div if:true={cartItems} class="slds-grid slds-grid_align-end">
-                <div class="slds-text-align_center slds-text-heading_medium slds-p-right_large">Total Price: ${globalTotal}</div>
+                <div class="slds-text-align_center slds-text-heading_medium slds-p-right_large">Total Price:
+                    <lightning-formatted-number value={globalTotal}
+                                                format-style="currency"
+                                                currency-code={currencyCode}>
+                    </lightning-formatted-number>
+                </div>
                 <lightning-button label={labels.Button_Checkout}
                                   variant="brand"
                                   onclick={checkoutAction}>
