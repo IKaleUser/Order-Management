@@ -1,0 +1,21 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.price {
+    color: grey;
+}
+
+.description-container {
+    overflow-wrap: break-word;
+    overflow: hidden;
+    height: 75px;
+}
+.image {
+    width:auto;
+    height: 100%;
+}
+
+.image-container {
+    height: 250px;
+}

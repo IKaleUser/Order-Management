@@ -1,0 +1,18 @@
+.close-icon {
+    background-color: white;
+    line-height: 0;
+    display: inline-block;
+}
+
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff00;
+}
+
+.spinner-effect {
+    filter: blur(1px);
+}

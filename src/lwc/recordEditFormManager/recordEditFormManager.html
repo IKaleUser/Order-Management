@@ -1,0 +1,49 @@
+<template>
+    <c-modal-window header={headerText}
+                    show-spinner={isLoading}
+                    spinner-size="medium">
+        <lightning-record-edit-form object-api-name={objectApiName}
+                                    onsuccess={handleSuccess}
+                                    onerror={handleError}>
+            <lightning-messages></lightning-messages>
+            <div if:true={errorMessage} class="slds-notify_container slds-is-relative">
+                <div role="alert" class="slds-notify slds-notify_toast slds-theme_error">
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small">{errorMessage}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-grid slds-wrap" style={bodyStyle}>
+                <template for:each={fieldsToInput} for:item="field">
+                    <div class={fieldClass} key={field.apiName} data-field={field.apiName}>
+                        <lightning-input-field field-name={field.apiName}
+                                               onchange={handleChange}>
+                        </lightning-input-field>
+                    </div>
+                </template>
+            </div>
+        </lightning-record-edit-form>
+
+        <div slot="footer">
+            <div class="slds-grid slds-grid_align-end">
+                <lightning-button variant="neutral"
+                                  label={labels.Button_Cancel}
+                                  title={labels.Button_Cancel}
+                                  onclick={doCancel}></lightning-button>
+                <lightning-button class="slds-m-left--x-small"
+                                  variant="neutral"
+                                  data-window='false'
+                                  label={labels.Save_New}
+                                  title={labels.Save_New}
+                                  onclick={doSave}></lightning-button>
+                <lightning-button class="slds-m-left--x-small"
+                                  variant="brand"
+                                  data-window='true'
+                                  label={labels.Button_Save}
+                                  title={labels.Button_Save}
+                                  onclick={doSave}></lightning-button>
+            </div>
+        </div>
+    </c-modal-window>
+</template>

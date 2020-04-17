@@ -1,0 +1,125 @@
+<template>
+    <c-modal-window header={labels.Shopping_Cart}
+                    show-spinner={isLoading}
+                    spinner-size="medium">
+        <template if:true={cartItems}>
+            <div class="slds-col slds-table--header-fixed_container table-header table">
+                <div class="slds-scrollable" style="height:100%;">
+                    <table class="slds-table slds-table_cell-buffer slds-table--header-fixed">
+                        <thead>
+                        <tr class="slds-line-height_reset slds-text-title_caps">
+                            <th class="" scope="col">
+                                <div class="slds-truncate slds-cell-fixed table-header" title={labels.Image}>
+
+                                </div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate slds-cell-fixed table-header" title={labels.Title_Name}>
+
+                                </div>
+                            </th>
+                            <th class="" scope="col" style="width: 15%">
+                                <div class="slds-truncate slds-cell-fixed table-header" title={labels.Title_Price}>
+                                    {labels.Title_Price}
+                                </div>
+                            </th>
+                            <th class="" scope="col" style="width: 20%">
+                                <div class="slds-truncate slds-cell-fixed table-header" title={labels.Title_Quantity}>
+                                    {labels.Title_Quantity}
+                                </div>
+                            </th>
+                            <th class="" scope="col" style="width: 5%">
+                                <div class="slds-truncate slds-cell-fixed table-header" title="">
+
+                                </div>
+                            </th>
+                            <th class="" scope="col" style="width: 20%">
+                                <div class="slds-truncate slds-cell-fixed table-header" title={labels.Title_Total}>
+                                    {labels.Title_Total}
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <template for:each={cartItems} for:item="cartItem" for:index="index">
+                            <tr key={cartItem.Id}>
+                                <td>
+                                    <div class="slds-truncate profile-photo" title={labels.Image}>
+                                        <img src={cartItem.Image__c} alt="No image" class="profile-photo"/>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="slds-truncate" title={labels.Title_Name}>
+                                        <a onclick={navigateToProductViewRecordPage} data-id={cartItem.Id}>
+                                            <lightning-formatted-text value={cartItem.Name}>
+                                            </lightning-formatted-text>
+                                        </a>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="slds-truncate" title={labels.Title_Price}>
+                                        <lightning-formatted-number value={cartItem.Price__c}
+                                                                    format-style="currency"
+                                                                    currency-code={currencyCode}>
+                                        </lightning-formatted-number>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="slds-truncate" title={labels.Title_Quantity}>
+                                        <input class="slds-input"
+                                               type="number"
+                                               data-id={cartItem.Id}
+                                               value={cartItem.ProductCount}
+                                               onchange={handleQuantityChange}>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="slds-truncate" title="">
+                                        <lightning-button-icon icon-name="utility:delete"
+                                                               title={labels.Button_Delete}
+                                                               variant="border-filled"
+                                                               alternative-text="Delete"
+                                                               data-id={cartItem.Id}
+                                                               onclick={deleteAction}>
+                                        </lightning-button-icon>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="slds-truncate" title={labels.Title_Total}>
+                                        <lightning-formatted-number value={cartItem.TotalPrice}
+                                                                    format-style="currency"
+                                                                    currency-code={currencyCode}>
+                                        </lightning-formatted-number>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </template>
+
+        <template if:false={cartItems}>
+            <lightning-formatted-text class="slds-text-heading_medium slds-align_absolute-center"
+                                      value="Your cart is empty">
+            </lightning-formatted-text>
+        </template>
+
+        <div slot="footer">
+            <div if:true={cartItems} class="slds-grid slds-grid_align-end">
+                <div class="slds-text-align_center slds-text-heading_medium slds-p-right_large">Total Price: ${globalTotal}</div>
+                <lightning-button label={labels.Button_Checkout}
+                                  variant="brand"
+                                  onclick={checkoutAction}>
+                </lightning-button>
+            </div>
+        </div>
+    </c-modal-window>
+</template>

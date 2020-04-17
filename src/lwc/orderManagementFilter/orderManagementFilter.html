@@ -1,0 +1,30 @@
+<template>
+    <div>
+        <lightning-card title={labels.Filter}>
+            <div slot="actions">
+                <lightning-button label={labels.Button_Clear} onclick={clearFilter}></lightning-button>
+            </div>
+
+            <div class="slds-p-horizontal_small">
+                <div>
+                    <lightning-record-edit-form object-api-name={filterObjectApiName}>
+                        <lightning-messages>
+                        </lightning-messages>
+                        <template for:each={filterFields} for:item="fieldToFilter">
+                            <div key={fieldToFilter}>
+                                <lightning-input-field field-name={fieldToFilter}>
+                                </lightning-input-field>
+                            </div>
+                        </template>
+                    </lightning-record-edit-form>
+                </div>
+
+                <div class="slds-p-top_large">
+                    <button class="slds-button slds-button_neutral slds-button_stretch apply-button"
+                            onclick={filterApply}>{labels.Button_Apply}
+                    </button>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+</template>

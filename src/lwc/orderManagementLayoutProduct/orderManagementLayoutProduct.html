@@ -1,0 +1,38 @@
+<template>
+    <div>
+        <div class="container slds-p-horizontal_xx-small">
+            <div class="container-item slds-p-right_medium">
+                <lightning-input type="search"
+                                 placeholder="Enter product name"
+                                 variant="label-hidden"
+                                 onchange={handleNameChange}>
+                </lightning-input>
+            </div>
+
+            <div>
+                <label>
+                    <lightning-button label={labels.Button_Search}
+                                      variant="brand"
+                                      icon-name="utility:search"
+                                      onclick={searchProducts}>
+                    </lightning-button>
+                </label>
+            </div>
+        </div>
+
+        <div>
+            <div if:true= {isLoaded} class="slds-grid slds-wrap product-container slds-scrollable_y">
+                <template for:each={products} for:item="product">
+                    <div class="slds-large-size_1-of-3 slds-medium-size_1-of-2 slds-size_1-of-1 slds-p-around_xx-small"
+                         key={product.Id}>
+                        <c-order-management-layout-product-item product={product}></c-order-management-layout-product-item>
+                    </div>
+                </template>
+            </div>
+
+            <div if:false={isLoaded} class="no-product">
+                <lightning-spinner alternative-text="Loading" size="medium" ></lightning-spinner>
+            </div>
+        </div>
+    </div>
+</template>

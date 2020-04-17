@@ -1,0 +1,24 @@
+.item {
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+.no-product {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 30vw;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.container-item {
+    flex-grow: 1;
+}
+
+.product-container {
+    max-height: 300vh;
+}

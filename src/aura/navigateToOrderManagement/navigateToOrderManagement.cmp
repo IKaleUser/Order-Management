@@ -1,0 +1,23 @@
+<aura:component description="navigateToOrderManagement" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId,force:appHostable">
+    <aura:html tag="style">
+        .slds-backdrop {
+        background: rgba(255, 255, 255, 0.75) !important;
+        }
+        .backgroundSpinner{
+        background: rgba(0, 0, 0, 0) !important;
+        }
+        .modal-body {
+        background: rgba(0, 0, 0, 0) !important;
+        box-shadow: none !important;
+        }
+        .closeIcon {
+        display:none !important;
+        }
+        .desktop {
+        overflow: visible !important;
+        }
+    </aura:html>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:navigation aura:id="navService"/>
+    <aura:attribute name="recordId" type="String" />
+</aura:component>

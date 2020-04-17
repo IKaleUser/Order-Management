@@ -1,0 +1,51 @@
+<template>
+   <div>
+       <div class='slds-grid'>
+           <div class='slds-col slds-size_1-of-1'>
+               <c-order-management-header record-id={recordId}
+                                          object-api-name={constants.ACCOUNT_OBJECT.objectApiName}
+                                          fields={accountFields}>
+                   <lightning-button if:true={isManager}
+                                     class="slds-p-right_small"
+                                     label={labels.Button_Create_Product}
+                                     onclick={createNewProduct}>
+                   </lightning-button>
+
+                   <lightning-button label={labels.Button_Cart}
+                                     onclick={openShoppingCart}>
+                   </lightning-button>
+               </c-order-management-header>
+           </div>
+       </div>
+
+       <div class="slds-grid slds-p-top_medium">
+           <div class="slds-col slds-size_1-of-3 ">
+               <c-order-management-filter filter-object-api-name={constants.PRODUCT_OBJECT.objectApiName}
+                                          filter-fields={filterFields}
+                                          onapply={filterApplyHandler}>
+               </c-order-management-filter>
+           </div>
+
+           <div class="slds-col slds-size_2-of-3 slds-p-horizontal_medium">
+               <c-order-management-layout-product products={products}
+                                                  onsearch={searchProductHandler}
+                                                  onadd={addToCart}
+                                                  is-loaded={isLoaded}>
+               </c-order-management-layout-product>
+           </div>
+       </div>
+       <c-record-edit-form-manager object-api-name={constants.PRODUCT_OBJECT.objectApiName}
+                                   fields={createFormFields}
+                                   populated-fields={populatedFieldsToCreate}
+                                   onsuccess={handleSuccess}>
+       </c-record-edit-form-manager>
+
+       <c-order-management-shopping-cart cart-items={cart}
+                                         account-id={recordId}
+                                         currency-code="USD"
+                                         oncheckout= {handleCheckout}
+                                         ondelete={deleteCartItem}
+                                         onchangequantity= {setCartItemUpdatedParams}>
+       </c-order-management-shopping-cart>
+   </div>
+</template>

@@ -1,0 +1,23 @@
+<template>
+    <div class="card">
+        <lightning-card>
+            <div class="image-container slds-text-align_center"><img class="slds-p-horizontal_small image" src={product.Image__c}></div>
+            <h1 class="slds-text-align_center">{product.Name}</h1>
+            <p class="slds-text-align_center price">${product.Price__c}</p>
+            <p class="slds-p-horizontal_small description-container">{product.Description__c}</p>
+
+            <div class="slds-align_absolute-center" slot="footer">
+                <lightning-button class="slds-p-right_small"
+                                  label={labels.Button_Details}
+                                  data-id={product.Id}
+                                  onclick={showDetails}>
+                </lightning-button>
+
+                <lightning-button label={labels.Button_Add}
+                                  onclick={addAction}
+                                  data-id={product.Id}>
+                </lightning-button>
+            </div>
+        </lightning-card>
+    </div>
+</template>
