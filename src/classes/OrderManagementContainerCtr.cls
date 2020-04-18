@@ -1,6 +1,6 @@
 public with sharing class OrderManagementContainerCtr {
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static ResultData getSearchResults(String key, String filterResultString) {
         FilterResult filterResult = (FilterResult)JSON.deserialize(filterResultString, FilterResult.class);
         ResultData result = new ResultData();
