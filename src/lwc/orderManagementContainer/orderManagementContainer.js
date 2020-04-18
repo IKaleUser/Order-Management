@@ -63,7 +63,7 @@ export default class OrderManagementContainer extends LightningElement {
     searchProducts() {
         getSearchResults({key: this.searchKey,  filterResultString : JSON.stringify(this.filterData)})
             .then(result => {
-                this.products = this.checkProductListForEmpty(JSON.parse(result.resultJSON));
+                this.products = JSON.parse(result.resultJSON);
                 this.isLoaded = true;
             })
             .catch(error => {
@@ -146,7 +146,6 @@ export default class OrderManagementContainer extends LightningElement {
             productObject[fieldApiName] = record.fields[fieldApiName].value;
         }
         productObject.Id = record.id;
-
         this.products.unshift(
             productObject
         );
@@ -156,10 +155,6 @@ export default class OrderManagementContainer extends LightningElement {
         for (let field in fieldsObject) {
             resultArray.push(fieldsObject[field].fieldApiName);
         }
-    }
-
-    checkProductListForEmpty(productList) {
-        return  productList.length > 0 ? productList : null;
     }
 
     get recordIdFromState(){
